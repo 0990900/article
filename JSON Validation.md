@@ -68,7 +68,7 @@ import * as t from 'io-ts'
 import { PathReporter } from 'io-ts/lib/PathReporter'
 
 const User = t.type({
-  userId: t.number, // 이 부분에 검증 함수로 필드에 정보르 줄 수 있다.
+  userId: t.number, // 이 부분에 검증 함수로 필드에 정보를 줄 수 있다.
   name: t.string
 })
 
