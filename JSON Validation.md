@@ -64,3 +64,29 @@ export class Post {
 > Codec<A, O, I>이 있을 때, I => A 를 디코딩(Read)이라고 하고, A => O 를 인코딩(Write)이라고 한다.
 
 디코딩과 인코딩에 사용되는 기능을 함수의 합성으로 만들 수 있다.
+
+``` ts
+import * as t from 'io-ts'
+import { PathReporter } from 'io-ts/lib/PathReporter'
+
+const User = t.type({
+  userId: t.number,
+  name: t.string
+})
+
+type User = t.TypeOf<typeof User>
+
+const result = User.decode({ name: 'Andy' })
+console.log(PathReporter.report(result))
+```
+
+
+
+
+
+
+
+
+
+
+
