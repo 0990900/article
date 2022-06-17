@@ -263,7 +263,7 @@ const compiler = <A>(f: (...args: any[]) => Trampoline<A>, context?: any) => {
 };
 ```
 
-최종 구현된 컴파일러는 [여기](https://github.com/0990900/try-typescript/blob/main/src/trampoline.ts)에 있다.
+초기에 구현된 컴파일러는 [여기](https://github.com/0990900/try-typescript/blob/main/src/trampoline-old.ts)에 있고, 좀 더 가다듬은 컴파일러는 [여기](https://github.com/0990900/try-typescript/blob/main/src/trampoline.ts)에 있다.
 
 ## 그 외에도
 
