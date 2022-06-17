@@ -234,6 +234,8 @@ const fibonacci = (n: number): Trampoline<number> => {
 console.log(compiler(fibonacci)(10000));
 ```
 
+테스트 코드는 [여기](https://github.com/0990900/try-typescript/blob/main/test/trampoline.test.ts)에 있다.
+
 ### 구현
 
 컴파일러를 구현해보자.
@@ -260,6 +262,8 @@ const compiler = <A>(f: (...args: any[]) => Trampoline<A>, context?: any) => {
     }
 };
 ```
+
+최종 구현된 컴파일러는 [여기](https://github.com/0990900/try-typescript/blob/main/src/trampoline.ts)에 있다.
 
 ## 그 외에도
 
