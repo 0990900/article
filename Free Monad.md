@@ -240,8 +240,8 @@ console.log(compiler(fibonacci)(10000));
 
 1. 컴파일러는 `Trampoline`을 리턴하는 함수를 파라미터로 받는다.
 2. 재귀적으로 호출하여 어떤 타입의 인스턴스인지 확인한다.
-	3. Suspend 타입인 경우 이전에 호출한 값을 그 다음 Suspend 함수에 전달한다.
-	4. Done 타입인 경우 리턴한다.
+3. Suspend 타입인 경우 이전에 호출한 값을 그 다음 Suspend 함수에 전달한다.
+4. Done 타입인 경우 리턴한다.
 
 ``` typescript
 const compiler = <A>(f: (...args: any[]) => Trampoline<A>, context?: any) => {
