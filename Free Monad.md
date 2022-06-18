@@ -140,10 +140,10 @@ const stop = (next?: Command): Stop => (path: string[]) => {
     next && next(path);
 }
 
-const command: Command = move(50, turn(45, stop()));
-const compiler = (c: Command): Array<string> => {
+const program: Command = move(50, turn(45, stop()));
+const compiler = (program: Command): Array<string> => {
 		const path = [] as Array<string>;
-		c(path);
+		program(path);
 		return path;
 }
 ```
