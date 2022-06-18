@@ -74,7 +74,7 @@ const compiler = (p: () => void) => p();
 그래서 아래처럼 타입을 미리 정의하고 시작한다.
 
 ``` typescript
-type Program = Move | Turn | Stop
+type Command = Move | Turn | Stop
 ```
 
 실제는 이렇게 구현이 가능할 것이다.
@@ -123,25 +123,25 @@ const program = stop(turn(45, move(50)));
 type Move = (path: string[]) => void;
 type Turn = (path: string[]) => void;
 type Stop = (path: string[]) => void;
-type Program = Move | Turn | Stop;
+type Command = Move | Turn | Stop;
 
-const move = (meter: number, next?: Program): Move => (path: string[]) => {
+const move = (meter: number, next?: Command): Move => (path: string[]) => {
     path.push(`Move ${meter} meters`);
     next && next(path);
 }
 
-const turn = (degree: number, next?: Program): Turn => (path: string[]) => {
+const turn = (degree: number, next?: Command): Turn => (path: string[]) => {
     path.push(`Turn ${degree} degrees`);
     next && next(path);
 }
 
-const stop = (next?: Program): Stop => (path: string[]) => {
+const stop = (next?: Command): Stop => (path: string[]) => {
     path.push(`Stop`);
     next && next(path);
 }
 
-const program: Program = move(50, turn(45, stop()));
-const compiler = (c: Program): Array<string> => {
+const command: Command = move(50, turn(45, stop()));
+const compiler = (c: Command): Array<string> => {
 		const path = [] as Array<string>;
 		c(path);
 		return path;
@@ -159,7 +159,7 @@ console.log(compiler(move(100, turn(45, move(50, stop())))));
 
 결국 거북이를 다루는 프로그램은 `Move`, `Turn`, `Stop`의 언어로 이루어진다.
 
-여기에 다른 명령어가 추가된다고 해도 `Program`의 서브 타입을 추가하는 방법으로 쉽게 해결이 가능하다.
+여기에 다른 명령어가 추가된다고 해도 `Command`의 서브 타입을 추가하는 방법으로 쉽게 해결이 가능하다.
 
 > `Free Monad`를 표현하는 방법은 언어에 따라 모두 다르다. 하지만 기본 개념은 동일하다.
 
