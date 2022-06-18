@@ -120,28 +120,32 @@ const program = stop(turn(45, move(50)));
 순방향으로 구현을 해보면, 다음과 같다.
 
 ``` typescript
-type Move = () => void;
-type Turn = () => void;
-type Stop = () => void;
+type Move = (path: string[]) => void;
+type Turn = (path: string[]) => void;
+type Stop = (path: string[]) => void;
 type Program = Move | Turn | Stop;
 
-const move = (meter: number, next?: Program): Move => () => {
-    console.log(`Move ${meter} meter`);
-    next && next();
+const move = (meter: number, next?: Program): Move => (path: string[]) => {
+    path.push(`Move ${meter} meter`);
+    next && next(path);
 }
 
-const turn = (degree: number, next?: Program): Turn => () => {
-    console.log(`Turn ${degree} degree`);
-    next && next();
+const turn = (degree: number, next?: Program): Turn => (path: string[]) => {
+    path.push(`Turn ${degree} degree`);
+    next && next(path);
 }
 
-const stop = (next?: Program): Stop => () => {
-    console.log(`Stop`);
-    next && next();
+const stop = (next?: Program): Stop => (path: string[]) => {
+    path.push(`Stop`);
+    next && next(path);
 }
 
 const program: Program = move(50, turn(45, stop()));
-const compiler = (c: Program) => c();
+const compiler = (c: Program): Array<string> => {
+		const path = [] as Array<string>;
+		c(path);
+		return path;
+}
 ```
 
 
